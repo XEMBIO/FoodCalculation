@@ -1,0 +1,258 @@
+<Page x:Class="FoodCalculation.Views.AddDishPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddDishPage">
+
+    <Grid>
+
+        <Grid.Background>
+            <LinearGradientBrush>
+                <GradientStop Color="#006ba9" Offset="0"/>
+                <GradientStop Color="#001a4a" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Page title -->
+        <Label
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Content="Gericht hinzufuegen"
+            Margin="20,0"
+            x:Name="PageTitle"
+            FontSize="35"
+            Foreground="White"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontWeight="Bold"/>
+
+        <!-- Back button -->
+        <Button
+            Grid.Column="3"
+            Grid.Row="0"
+            Margin="20"
+            Content="Zurueck"
+            FontSize="20"
+            Click="BackButton_Click"
+            x:Name="BackButton">
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation Storyboard.TargetName="BackButton" Storyboard.TargetProperty="Margin" To="15" Duration="0:0:0.2"/>
+                            <DoubleAnimation Storyboard.TargetName="BackButton" Storyboard.TargetProperty="FontSize" By="2" Duration="0:0:0.2" FillBehavior="HoldEnd"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation Storyboard.TargetName="BackButton" Storyboard.TargetProperty="Margin" To="20" Duration="0:0:0.2"/>
+                            <DoubleAnimation Storyboard.TargetName="BackButton" Storyboard.TargetProperty="FontSize" By="-2" Duration="0:0:0.2" FillBehavior="Stop"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#a1000000" CornerRadius="25">
+                        <TextBlock
+                            Text="Zurueck"
+                            FontSize="{TemplateBinding FontSize}"
+                            Foreground="White"
+                            TextAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Dish name input -->
+        <Border
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Margin="20,7,0,7"
+            Background="#a1000000"
+            CornerRadius="20"
+            BorderThickness="0">
+            <TextBox
+                Background="Transparent"
+                BorderThickness="0"
+                Foreground="White"
+                Margin="10,0"
+                FontSize="20"
+                x:Name="DishNameTextBox"
+                VerticalContentAlignment="Center"/>
+        </Border>
+
+        <!-- Ingredient input (format: Name Amount Unit) -->
+        <Border
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Background="#a1000000"
+            Margin="20,7,3,7"
+            CornerRadius="20"
+            BorderThickness="0">
+            <TextBox
+                Background="Transparent"
+                Foreground="White"
+                Margin="10,0"
+                BorderThickness="0"
+                FontSize="20"
+                VerticalContentAlignment="Center"
+                x:Name="IngredientNameTextBox"/>
+        </Border>
+
+        <!-- Ingredient list display -->
+        <Border
+            Grid.Row="3"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Margin="20,7,0,7"
+            Background="#a1000000"
+            CornerRadius="20">
+            <ScrollViewer
+                Background="Transparent"
+                VerticalScrollBarVisibility="Auto"
+                Margin="8">
+                <StackPanel x:Name="IngredientListPanel"/>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Add ingredient button -->
+        <Button
+            Grid.Row="2"
+            Grid.Column="2"
+            Margin="0,7"
+            Background="#7a7aff"
+            FontSize="20"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Top"
+            Click="AddIngredientButton_Click"
+            x:Name="AddIngredientButton">
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation Storyboard.TargetName="AddIngredientButton" Storyboard.TargetProperty="Margin" To="0,2" Duration="0:0:0.2"/>
+                            <DoubleAnimation Storyboard.TargetName="AddIngredientButton" Storyboard.TargetProperty="FontSize" By="2" Duration="0:0:0.2" FillBehavior="HoldEnd"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation Storyboard.TargetName="AddIngredientButton" Storyboard.TargetProperty="Margin" To="0,7" Duration="0:0:0.2"/>
+                            <DoubleAnimation Storyboard.TargetName="AddIngredientButton" Storyboard.TargetProperty="FontSize" By="-2" Duration="0:0:0.2" FillBehavior="Stop"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#a1000000" CornerRadius="20">
+                        <TextBlock
+                            Text="add"
+                            FontSize="{TemplateBinding FontSize}"
+                            Foreground="White"
+                            TextAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Confirm / save dish button -->
+        <Button
+            Grid.Row="4"
+            Grid.Column="3"
+            Margin="5"
+            Content="Bestaetigen"
+            FontSize="20"
+            Click="ConfirmButton_Click"
+            x:Name="ConfirmButton">
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation Storyboard.TargetName="ConfirmButton" Storyboard.TargetProperty="Margin" To="0" Duration="0:0:0.2"/>
+                            <DoubleAnimation Storyboard.TargetName="ConfirmButton" Storyboard.TargetProperty="FontSize" By="2" Duration="0:0:0.2" FillBehavior="HoldEnd"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation Storyboard.TargetName="ConfirmButton" Storyboard.TargetProperty="Margin" To="5" Duration="0:0:0.2"/>
+                            <DoubleAnimation Storyboard.TargetName="ConfirmButton" Storyboard.TargetProperty="FontSize" By="-2" Duration="0:0:0.2" FillBehavior="Stop"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#a1000000" CornerRadius="25">
+                        <TextBlock
+                            Text="Bestaetigen"
+                            FontSize="{TemplateBinding FontSize}"
+                            Foreground="White"
+                            TextAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Vegan checkbox -->
+        <CheckBox
+            Grid.Row="1"
+            Margin="10,0,0,0"
+            Grid.Column="3"
+            Content="Vegan"
+            VerticalAlignment="Center"
+            Foreground="White"
+            Click="VeganCheckBox_Click"
+            x:Name="VeganCheckBox">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+        <!-- Vegetarian checkbox -->
+        <CheckBox
+            Grid.Row="2"
+            Grid.Column="3"
+            Margin="10,0,0,0"
+            Content="Vegetarisch"
+            VerticalAlignment="Center"
+            Foreground="White"
+            Click="VegetarianCheckBox_Click"
+            x:Name="VegetarianCheckBox">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+    </Grid>
+</Page>
